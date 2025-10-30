@@ -11,8 +11,11 @@
 **How To**: <reproduce your work in steps>
 
 **Delivery URL**
+
 •	URL of the two demonstration videos (YouTube, Tiktok, Bilibili, etc. The demonstration video should cover the whole workspace (AMD MiniPC, monitor with the view of cameras opened, SO-101 ARM, Cameras, task actions))
+
 •	URL of your dataset in Hugging Face
+
 •	URL of your model in Hugging Face
 
 

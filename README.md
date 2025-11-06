@@ -17,7 +17,7 @@
 •	URL of your model in Hugging Face
 ```
 
-Directory Tree Suggestion of this repo,
+Directory Tree of this repo,
 
 <template>
     

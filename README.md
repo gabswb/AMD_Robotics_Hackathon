@@ -31,6 +31,13 @@
 - *Flexibility and adaptability of the solution*
 - *Types of commands or interfaces needed to control the robot*
 
+## Additional Links
+*For example, you can provide links to:*
+
+- *Link to a video of your robot performing the task*
+- *URL of your dataset in Hugging Face*
+- *URL of your model in Hugging Face*
+- *Link to a blog post describing your work*
 
 ## Code submission
 
@@ -77,12 +84,3 @@ outputs/train/smolvla_so101_2cube_30k_steps/wandb/
 
 1. The `latest-run` is the soft link, please make sure to copy the real target directory it linked with all sub dirs and files.
 2. Only provide (upload) the wandb of your last success pre-trained model for the Mission.
-
-
-## Additional Links
-*For example, you can provide links to:*
-
-- *Link to a video of your robot performing the task*
-- *URL of your dataset in Hugging Face*
-- *URL of your model in Hugging Face*
-- *Link to a blog post describing your work*

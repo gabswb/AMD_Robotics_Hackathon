@@ -47,6 +47,7 @@ let activePuttingAwayBarcode = null;
 let finishTimer = null;
 let draggingBarcode = null;
 let suppressDrag = false;
+let finishAutoPauseTimer = null;
 
 const KidSignal = {
   kid1: "GREEN",
@@ -103,12 +104,8 @@ function init() {
     navigate("welcome");
   });
 
-  els.consoleInferStartBtn?.addEventListener("click", () => {
-    toast("Robot inference: start (reserved).");
-  });
-  els.consoleInferPauseBtn?.addEventListener("click", () => {
-    toast("Robot inference: pause (reserved).");
-  });
+  els.consoleInferStartBtn?.addEventListener("click", () => onInferenceControlClick("start"));
+  els.consoleInferPauseBtn?.addEventListener("click", () => onInferenceControlClick("pause"));
   els.consoleScanBtn?.addEventListener("click", onScanConsoleClick);
   window.addEventListener("keydown", onConsoleKeyDown, true);
 
@@ -186,6 +183,24 @@ function render() {
   renderConsole();
 }
 
+function sendRobotInferenceControl(action) {
+  return sendWs({ type: "robot_inference_control", source: "webapp", action });
+}
+
+async function onInferenceControlClick(action) {
+  const connected = ws?.readyState === WebSocket.OPEN;
+  if (!connected) {
+    toast("Host not reachable. Start the host server first and connect WebSocket in 🎁 drawer.");
+    return;
+  }
+  const ok = sendRobotInferenceControl(action);
+  if (!ok) {
+    toast("Failed to send command.");
+    return;
+  }
+  toast(action === "start" ? "Inference: start" : "Inference: pause");
+}
+
 function renderConsole() {
   if (!els.consoleScanBtn) return;
   const connected = ws?.readyState === WebSocket.OPEN;
@@ -214,6 +229,16 @@ function renderScreens() {
       if (state.screen !== "finish") return;
       els.returnBtn.hidden = false;
     }, 650);
+    // After finish screen shows, pause inference after a short delay.
+    if (!finishAutoPauseTimer) {
+      finishAutoPauseTimer = window.setTimeout(() => {
+        finishAutoPauseTimer = null;
+        sendRobotInferenceControl("pause");
+      }, 1000);
+    }
+  } else if (finishAutoPauseTimer) {
+    window.clearTimeout(finishAutoPauseTimer);
+    finishAutoPauseTimer = null;
   }
 }
 

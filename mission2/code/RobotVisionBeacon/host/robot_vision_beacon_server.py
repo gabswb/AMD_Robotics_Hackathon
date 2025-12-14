@@ -50,6 +50,9 @@ class RobotVisionBeaconServer:
         # - passive: interactive process running, but keys should not trigger RED
         # - any_key_red: any key triggers RED
         self._interactive_mode: str = "passive"
+        # Optional: robot inference control (webapp → robot process).
+        # Values: running | paused
+        self._robot_inference_state: str = "paused"
 
     def get_interactive_mode(self) -> str:
         return self._interactive_mode
@@ -165,6 +168,10 @@ class RobotVisionBeaconServer:
             await self._on_interactive_control(data)
         elif msg_type == "interactive_key":
             await self._on_interactive_key(data)
+        elif msg_type == "robot_inference_control":
+            await self._on_robot_inference_control(data, websocket)
+        elif msg_type == "robot_inference_status":
+            await self._on_robot_inference_status(data, websocket)
         elif msg_type == "heartbeat":
             return
 
@@ -187,6 +194,39 @@ class RobotVisionBeaconServer:
             return
         # Any key from dashboard triggers RED.
         await self.send_state(ColorState.RED, source="host")
+
+    async def _on_robot_inference_control(self, data: Dict[str, Any], websocket: Any) -> None:
+        """
+        Forward start/pause commands from a dashboard to the inference process.
+        """
+        action = data.get("action")
+        if not isinstance(action, str):
+            return
+        action = action.strip().lower()
+        if action not in ("start", "pause"):
+            return
+        self._robot_inference_state = "running" if action == "start" else "paused"
+        await self._broadcast_except(data, exclude=websocket)
+        await self._broadcast(
+            {
+                "type": "robot_inference_status",
+                "source": "host",
+                "state": self._robot_inference_state,
+            }
+        )
+
+    async def _on_robot_inference_status(self, data: Dict[str, Any], websocket: Any) -> None:
+        """
+        Forward status messages from the inference process to dashboards.
+        """
+        state = data.get("state")
+        if not isinstance(state, str):
+            return
+        state = state.strip().lower()
+        if state not in ("running", "paused"):
+            return
+        self._robot_inference_state = state
+        await self._broadcast_except(data, exclude=websocket)
 
     async def _on_assignment_update(self, data: Dict[str, Any]) -> None:
         code = data.get("code") or data.get("barcode")

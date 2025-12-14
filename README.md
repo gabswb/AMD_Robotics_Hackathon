@@ -1,43 +1,41 @@
-**### Make a fork or copy of this repo and fill in your team submission details! ###**
-
 # AMD_Robotics_Hackathon_2025_[Project Name]
 
 ## Team Information
 
-**Team:** *Your team number, name of your team, and members*
+**Team:** *Stereobot*: Thomas Gaviard, Haoran Wang and Gabriel Schwab
 
-**Summary:** *A brief description of your work*
+**Summary:** *Two arms, one model to rule them both. Our bi-manual robot picks, scans, and sorts packages autonomously—an end-to-end, modular solution built for accurate and scalable warehouse automation.*
 
-*< Images or video demonstrating your project >*
+<video src=".assets/IMG_2818.mov" controls></video>
+
 
 ## Submission Details
 
 ### 1. Mission Description
-- *Real world application of your mission*
+- Our mission demonstrates a real-world warehouse automation use case through a candy warehouse scenario, where a bi-manual robotic system autonomously picks and scans items with one arm and hands them off to a second arm for accurate sorting and packaging, showcasing a modular, end-to-end solution for high-throughput fulfillment.
 
 ### 2. Creativity
-- *What is novel or unique in your approach?*
-- *Innovation in design, methodology, or application*
+- Our approach is novel in that we use a single unified model to coordinate a bi-manual robotic task, enabling seamless handoff between picking, scanning, and sorting. The system is fully modular and easy to use, remaining independent of specific scanning or sorting technologies while maintaining high accuracy. By design, it is low-cost and adaptable, allowing the same framework to be deployed across different hardware setups and warehouse workflows without reengineering.
 
 ### 3. Technical implementations
 - *Teleoperation / Dataset capture*
-    - *<Image/video of teleoperation or dataset capture>*
+ <video src=".assets/IMG_2806.mov" controls></video>
+    
 - *Training*
+We trained ACT on a compact dataset of 150 episodes using one top camera, one scan-state camera, and two arm-mounted cameras, following the LeRobot training recipe for 35K steps on AMD MI300X. To improve robustness, we fine-tuned the model on 30 failure-case episodes.
 - *Inference*
-    - *<Image/video of inference eval>*
+    - <video src=".assets/IMG_2818.mov" controls></video>
+
 
 ### 4. Ease of use
-- *How generalizable is your implementation across tasks or environments?*
-- *Flexibility and adaptability of the solution*
-- *Types of commands or interfaces needed to control the robot*
+- Generalization: The model successfully generalizes to all trained objects and also to new, previously unseen objects.
+- Flexibility & Adaptability: The system is fully independent of specific scanning or warehouse setups and operates solely on color feedback for sorting decisions.
+- Control Interface: The robot requires minimal inputs—color feedback, an inference script, and items to pick up—making deployment simple and low overhead.
 
 ## Additional Links
-*For example, you can provide links to:*
+Video showcase the high accuracy of our solution:
+ <video src=".assets/copy_5A603EF2-4888-420F-8DFB-4BA2BC8A32F6.mov" controls></video>
 
-- *Link to a video of your robot performing the task*
-- *URL of your dataset in Hugging Face*
-- *URL of your model in Hugging Face*
-- *Link to a blog post describing your work*
 
 ## Code submission
 

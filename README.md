@@ -36,6 +36,11 @@ We trained ACT on a compact dataset of 150 episodes using one top camera, one sc
 Video showcase the high accuracy of our solution:
  <video src=".assets/demo.mp4" controls></video>
 
+Model weights on HuggingFace hub: https://huggingface.co/tms-gvd/act-finetune-35k
+
+Datasets: 
+- https://huggingface.co/datasets/tms-gvd/scan-v2-merged-01-02-fix0-cycling
+- https://huggingface.co/datasets/tms-gvd/scan-v2-cycling-30
 
 ## Code submission
 

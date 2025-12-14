@@ -6,7 +6,7 @@
 
 **Summary:** *Two arms, one model to rule them both. Our bi-manual robot picks, scans, and sorts packages autonomously—an end-to-end, modular solution built for accurate and scalable warehouse automation.*
 
-<video src=".assets/IMG_2818.mov" controls></video>
+<video src=".assets/IMG_2818.mp4" controls></video>
 
 
 ## Submission Details
@@ -19,12 +19,12 @@
 
 ### 3. Technical implementations
 - *Teleoperation / Dataset capture*
- <video src=".assets/IMG_2806.mov" controls></video>
+ <video src=".assets/IMG_2806.mp4" controls></video>
     
 - *Training*
 We trained ACT on a compact dataset of 150 episodes using one top camera, one scan-state camera, and two arm-mounted cameras, following the LeRobot training recipe for 35K steps on AMD MI300X. To improve robustness, we fine-tuned the model on 30 failure-case episodes.
 - *Inference*
-    - <video src=".assets/IMG_2818.mov" controls></video>
+    - <video src=".assets/IMG_2818.mp4" controls></video>
 
 
 ### 4. Ease of use
@@ -34,7 +34,7 @@ We trained ACT on a compact dataset of 150 episodes using one top camera, one sc
 
 ## Additional Links
 Video showcase the high accuracy of our solution:
- <video src=".assets/copy_5A603EF2-4888-420F-8DFB-4BA2BC8A32F6.mov" controls></video>
+ <video src=".assets/demo.mp4" controls></video>
 
 
 ## Code submission

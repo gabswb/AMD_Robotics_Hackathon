@@ -8,7 +8,7 @@ Pick, Scans, Sort.
 
 **Summary:** *Two arms, one model to rule them both. Our bi-manual robot picks, scans, and sorts packages autonomously—an end-to-end, modular solution built for accurate and scalable warehouse automation.*
 
-[▶️ Watch Demo Video](.assets/time-lapse.mp4)
+https://github.com/user-attachments/assets/432d1f3d-6a5f-4893-bd81-b893cff9afdf
 
 
 ## Submission Details
